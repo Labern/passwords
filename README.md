@@ -11,7 +11,7 @@ Just having a password makes no sense. If every website you visited literally sa
 
 Yet passwords are still a useful way for a user to let a website or tool know that they are who they say they are. What is needed is a way to store some version of the password without actually storing the password itself. Best of all would be a scrambled version that no one could guess. It turns out this is exactly what happens, and that this scrambled form of a password is called a "hash". To produce a hash, we need a hashing function, by which I mean "a thing that takes plain text and produces a hashed version of it". One actual example of this — a non-reversible hash function — is [Bcrypt](https://github.com/bcrypt-ruby/bcrypt-ruby), which allows for the password to be stored in a new, scrambled form. All you need to know is that a hash is a scramble, and a hash function is a thing which does the scrambling. 
 
-You don't need to understand how a hashing function works: you only need to know that it works, and why it is needed. You put the toast in; let the toaster do the work. Then eat the toast. (If you want; I'm not telling you what to eat. You look great.)
+You don't need to understand how a hashing function works: you only need to know that it works, and why it is needed. You put the toast in; let the toaster do the work. Then eat the toast. (If you want; I'm not telling you what to eat. You look great.) Just as you put bread in and get toast out, so too if you put a plain text password into a hashing function, you get out a digest.
 
 For example, it is far better to let the user enter "password" and let the database have the non-reversible form of "password" -> hashing function -> $2a$12$hS9f57hYG28yn5AaTh/0fu8suk/MbUn7ZTNrAgUQRWqTD9w7HXkBi (for example). This way, the database on which the password is stored never knows the user's actual input, but can verify the user later by matching the password. (The use of salt, which adds an extra element of unpredictability, is stored inside the long list of letters, which allows the database to match the input password "password" with the digest).
 
@@ -32,7 +32,9 @@ Now, if you're really interested, you can see how a hashing function works.
 
 ## The details (or: how a hash function works)
 
-Bcrypt, applied like so:
+At this point, I will increase the complexity of the explanation, while going as slowly as possible. Here is an example of how a hashing function actually works, and how it can be used to compare your input on a login page to your saved password.
+
+To begin, let's focus on Bcrypt, applied like so:
 
 ```Ruby
     password = BCrypt::Password.create("password")
@@ -58,7 +60,7 @@ That is:
 
 1. The first three letters — <code>$2a</code> — refer to the algorithm used.
 2. The second part — in this case, <code>12</code> — refers to the cost. The numbers refers to <code>2^cost</code>, that is <code>2<sup>12</sup> = 4096</code>. The greater the cost, the more computational work required.
-3. The third part refers to the salt, which is extra spice which makes rainbow tables irrelevant. (That is, a rainbow table is a pre-prepared set of hashed passwords which would take the form of knowing all possible passwords for a specific set of characters. By adding a salt, knowing a password and hashing it does not allow for the crack.)
+3. The third part refers to the salt, which is extra spice which makes rainbow tables irrelevant. (That is, a rainbow table is a pre-prepared set of hashed passwords which would take the form of knowing all possible passwords for a specific set of characters. By adding a salt, knowing a password and hashing it does not allow for the crack.) The reason salts are useful is because if you hash "password" twice, you will get the same result. This is still better than the actual phrase "password", but can be improved. By adding a salt, which is a pre-generated piece of extra data added the moment your input it passed to the hash function, if two people used the same password, they will probably get a different digest.
 4. The fourth part is the hash itself, or the end product of the password having been run through Bcrypt.
 
 ## What?
