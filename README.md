@@ -63,6 +63,6 @@ The point of this was not for you to understand all of the details. It was to sh
 All of this falls under a branch of computer known as cryptography, and technically has nothing to do with computers. It is, however, used by them, and so becomes something a person interested in programming comes to study. Since we use computers daily, it is nevertheless interesting.
 
 ### Extra details
-I ommitted some details, such as the fact that passwords can also include some characters other than a-z and 0-9, but the same remains true: for every new character you add to your password, the more possible outcomes there are. This is why longer passwords are forced upon us by sites more and more often.
+I omitted some details, such as the fact that passwords can also include some characters other than a-z and 0-9, but the same remains true: for every new character you add to your password, the more possible outcomes there are. This is why longer passwords are forced upon us by sites more and more often.
 
 Similarly, I tried to avoid technical terms except where explaining them, so you should also know that the normal version of a password, e.g. "password", is called "plain text". So this was all about the benefits of a password digest versus a plaintext password. Though strange at first, this subject is quite simple, conceptually; the difficultly is really in understanding how it is implemented.
