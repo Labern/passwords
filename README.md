@@ -2,7 +2,9 @@
 By Labern
 
 ## Passwords and plain text
-The phrase to refer to a password as-is is plain text, meaning literally what is written. So the plain text version of "password" is "password". It turns out that while we refer to passwords via the things we write, the way they actually work is quite different. Here is a brief descrition that, while short, will explain how that process works.
+The phrase to refer to a password as-is is plain text, meaning literally what is written. So the plain text version of "password" is "password". It turns out that while we refer to passwords via the things we write, the way they actually work is quite different. Here is a brief descrition that, while short, will explain how that process works. 
+
+Don't be intimidated by the technical terms: I'll explain everything in clear English, and only then introduce the technical term — never the other way around.
 
 ## Why aren't passwords good the way I write 'em?
 Just having a password makes no sense. If every website you visited literally saved what you wrote, you would be hacked within minutes. If you know that most passwords are of a certain length, you can brute force them by writing a program which runs through every possible variation, e.g. aaaaaaaa through zzzzzzzz. (This would catch a password like "password" just after "passworc" and "passworb", assuming you run through every letter and number.) 
@@ -44,7 +46,7 @@ Allows for this to happen. The result of the above hash is:
 
 This output, called a digest, correponsds to multiple parts:
 
-```txt
+```
     $2a$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW
     \__/\/ \____________________/\_____________________________/
     Alg Cost      Salt                        Hash
